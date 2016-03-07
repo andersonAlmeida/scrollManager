@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style>
+		html, body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		.sec {
+			height: 100%;
+			width: 100%;
+		}
+
+		.sec:nth-child(odd) {
+			background-color: #000;
+		}
+	</style>
+</head>
+<body>
+	
+	<section class="sec sec-1"></section>
+	<section class="sec sec-2"></section>
+	<section class="sec sec-3"></section>
+	<section class="sec sec-4"></section>
+	<section class="sec sec-5"></section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="scrollManager.js"></script>	
+
+	<script>
+		$('.sec').scrollmanager({
+			onEnter: function() {
+				console.log("entrou")
+			},
+			onExit: function() {
+				console.log("saiu");
+			}
+		});
+	</script>
+</body>
+</html>
