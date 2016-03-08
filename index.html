@@ -34,11 +34,11 @@
 
 	<script>
 		$('.sec').scrollmanager({
-			onEnter: function() {
-				console.log("entrou")
+			onEnter: function(elm) {
+				console.log("entrou: ", elm)
 			},
-			onExit: function() {
-				console.log("saiu");
+			onExit: function(elm) {
+				console.log("saiu: ", elm);
 			}
 		});
 	</script>
