@@ -59,7 +59,7 @@
 
 	$.fn.scrollmanager = function(options) {
 		var defaults = {
-			offset: '0',
+			offset: 0,
 			context: win
 		},
 		settings = $.extend({
