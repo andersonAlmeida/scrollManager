@@ -12,22 +12,24 @@
 			padding: 0;
 		}
 		.sec {
+			/*height: 400px;*/
 			height: 100%;
 			width: 100%;
 		}
 
 		.sec:nth-child(odd) {
 			background-color: #000;
+			color: #fff;
 		}
 	</style>
 </head>
 <body>
 	
-	<section class="sec sec-1"></section>
-	<section class="sec sec-2"></section>
-	<section class="sec sec-3"></section>
-	<section class="sec sec-4"></section>
-	<section class="sec sec-5"></section>
+	<section class="sec sec-1"><h1>1</h1></section>
+	<section class="sec sec-2"><h1>2</h1></section>
+	<section class="sec sec-3"><h1>3</h1></section>
+	<section class="sec sec-4"><h1>4</h1></section>
+	<section class="sec sec-5"><h1>5</h1></section>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="scrollManager.js"></script>	
@@ -35,10 +37,10 @@
 	<script>
 		$('.sec').scrollmanager({
 			onEnter: function(elm) {
-				console.log("entrou: ", elm)
+				console.log("entrou: ", elm, " inview: ", this.inView);
 			},
 			onExit: function(elm) {
-				console.log("saiu: ", elm);
+				console.log("saiu: ", elm, " inview: ", this.inView);
 			}
 		});
 	</script>

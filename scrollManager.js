@@ -31,10 +31,9 @@
 		var sec = this.element,
 			context = $(this.context),
 			elmHeight = this.elmHeight,
-			winOffset = context.scrollTop() + win.innerHeight;		
+			winOffset = context.scrollTop() + win.innerHeight;	
 
-		// verifica se entrou na viewport
-		if( !this.inView && winOffset > sec.offset().top && winOffset <= ( sec.offset().top + sec.height() ) ) {
+		if( !this.inView && ( ( sec.offset().top >= context.scrollTop() &&  sec.offset().top < winOffset ) || ( sec.offset().top + sec.height() > context.scrollTop() && sec.offset().top + sec.height() < winOffset ) ) ) {
 			this.inView = true;
 
 			if(this.onEnter) {
@@ -44,8 +43,7 @@
 			return true;
 		}
 
-		// verifica se saiu da viewport
-		if( this.inView && winOffset < sec.offset().top || this.inView && winOffset > ( sec.offset().top + sec.height() ) ) {
+		if( this.inView && ( sec.offset().top + sec.height() < context.scrollTop() || sec.offset().top > winOffset ) ) {
 			this.inView = false;
 
 			if(this.onExit) {
@@ -53,9 +51,9 @@
 			}
 
 			return false;
-		}	
+		}
 
-
+		// this.inView = false;
 		return false;
 	};
 
