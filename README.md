@@ -1,4 +1,5 @@
 # scrollManager
+A simple plugin that verify if an element is in the viewport.
 
 ##options
 **offset**: values between 0 and 1 (default: 0) - the element visible area in the viewport
