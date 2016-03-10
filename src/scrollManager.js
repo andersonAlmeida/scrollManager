@@ -66,7 +66,9 @@
 		},
 		settings = $.extend({
 			onEnter: null,
-			onExit: null
+			onExit: null,
+			onceEnter: null,
+			onceExit: null
 		}, defaults, options);
 
 		return this.each (function () {
