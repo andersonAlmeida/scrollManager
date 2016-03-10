@@ -1,0 +1,25 @@
+{
+  "name": "scrollManager",
+  "version": "1.0.0",
+  "description": "a simple jquery plugin that verify if the section is visible in the viewport",
+  "main": "scrollManager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andersonAlmeida/scrollManager/"
+  },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "inview"
+  ],
+  "author": "andersonAlmeida",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

@@ -25,19 +25,21 @@
 </head>
 <body>
 	
-	<section class="sec sec-1"><h1>1</h1></section>
-	<section class="sec sec-2"><h1>2</h1></section>
-	<section class="sec sec-3"><h1>3</h1></section>
-	<section class="sec sec-4"><h1>4</h1></section>
-	<section class="sec sec-5"><h1>5</h1></section>
+	<section class="sec sec-1" data-hash="section-1"><h1>1</h1></section>
+	<section class="sec sec-2" data-hash="section-2"><h1>2</h1></section>
+	<section class="sec sec-3" data-hash="section-3"><h1>3</h1></section>
+	<section class="sec sec-4" data-hash="section-4"><h1>4</h1></section>
+	<section class="sec sec-5" data-hash="section-5"><h1>5</h1></section>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="scrollManager.js"></script>	
 
 	<script>
 		$('.sec').scrollmanager({
+			offset: .5,
 			onEnter: function(elm) {
 				console.log("entrou: ", elm, " inview: ", this.inView);
+				location.hash = $(elm).data('hash');
 			},
 			onExit: function(elm) {
 				console.log("saiu: ", elm, " inview: ", this.inView);

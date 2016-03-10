@@ -11,6 +11,7 @@
 		this.onEnter = options.onEnter;
 		this.onExit = options.onExit;
 		this.inView = false;
+		this.offset = options.offset;
 		
 		// bind events		
 		this.binds();
@@ -31,9 +32,10 @@
 		var sec = this.element,
 			context = $(this.context),
 			elmHeight = this.elmHeight,
-			winOffset = context.scrollTop() + win.innerHeight;	
+			winOffset = context.scrollTop() + win.innerHeight,
+			offset = sec.height() * this.offset;
 
-		if( !this.inView && ( ( sec.offset().top >= context.scrollTop() &&  sec.offset().top < winOffset ) || ( sec.offset().top + sec.height() > context.scrollTop() && sec.offset().top + sec.height() < winOffset ) ) ) {
+		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() &&  ( sec.offset().top + offset ) < winOffset ) || ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset ) ) ) {
 			this.inView = true;
 
 			if(this.onEnter) {
