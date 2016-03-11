@@ -14,6 +14,7 @@
 		this.onceExit = options.onceExit;
 		this.inView = false;
 		this.offset = options.offset;
+		this.scrollDirection = $(this.context).scrollTop();
 		
 		// bind events		
 		this.binds();
@@ -21,23 +22,27 @@
 	};
 
 	ScrollManager.prototype.binds = function() {
-		var self = this;
+		var self = this,
+			dir = 0;
 
 		$(this.context).on('scroll', function() {
+			// stores the scroll directoin
+			dir = ( self.scrollDirection > $(this).scrollTop() ) ? -1 : 1;
 
-			self.isInView();
+			self.isInView(dir);
 
+			self.scrollDirection = $(this).scrollTop();
 		});
 	};
 
-	ScrollManager.prototype.isInView = function() {
+	ScrollManager.prototype.isInView = function(direction) {
 		var sec = this.element,
 			context = $(this.context),
 			elmHeight = this.elmHeight,
 			winOffset = context.scrollTop() + win.innerHeight,
-			offset = sec.height() * this.offset;
+			offset = sec.height() * this.offset;	
 
-		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() &&  ( sec.offset().top + offset ) < winOffset ) || ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset ) ) ) {
+		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() && ( sec.offset().top + offset ) < winOffset ) || ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset ) ) ) {
 			this.inView = true;
 
 			if(this.onceEnter && typeof this.onceEnter === "function") {

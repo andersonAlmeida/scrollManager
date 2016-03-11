@@ -32,25 +32,25 @@
 	<section class="sec sec-5" data-hash="section-5"><h1>5</h1></section>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="build/scrollManager.min.js"></script>	
+	<script src="src/scrollManager.js"></script>	
 
 	<script>
 		var objs = [];
 		objs = $('.sec').scrollmanager({
-			offset: .3,
+			offset: 1,
 			onEnter: function(elm) {
 				console.log("entrou: ", elm, " inview: ", this.inView);
 				location.hash = $(elm).data('hash');
 			},
-			onExit: function(elm) {
-				console.log("saiu: ", elm, " inview: ", this.inView);
-			},
-			onceEnter: function(elm) {
-				console.log("UMA VEZ QUANDO ENTRAR : ", elm, " inview: ", this.inView);
-			},
-			onceExit: function(elm) {
-				console.log("UMA VEZ QUANDO SAIR : ", elm, " inview: ", this.inView);
-			}
+			// onExit: function(elm) {
+			// 	console.log("saiu: ", elm, " inview: ", this.inView);
+			// },
+			// onceEnter: function(elm) {
+			// 	console.log("UMA VEZ QUANDO ENTRAR : ", elm, " inview: ", this.inView);
+			// },
+			// onceExit: function(elm) {
+			// 	console.log("UMA VEZ QUANDO SAIR : ", elm, " inview: ", this.inView);
+			// }
 		});
 	</script>
 </body>
