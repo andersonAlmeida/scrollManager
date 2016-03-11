@@ -10,6 +10,8 @@
 		this.context = options.context;
 		this.onEnter = options.onEnter;
 		this.onExit = options.onExit;
+		this.onceEnter = options.onceEnter;
+		this.onceExit = options.onceExit;
 		this.inView = false;
 		this.offset = options.offset;
 		
@@ -38,7 +40,12 @@
 		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() &&  ( sec.offset().top + offset ) < winOffset ) || ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset ) ) ) {
 			this.inView = true;
 
-			if(this.onEnter) {
+			if(this.onceEnter && typeof this.onceEnter === "function") {
+				this.onceEnter.call(this, sec);
+				this.onceEnter = null;
+			}
+
+			if(this.onEnter && typeof this.onEnter === "function") {
 				this.onEnter.call(this, sec);
 			}
 
@@ -48,7 +55,12 @@
 		if( this.inView && ( sec.offset().top + sec.height() < context.scrollTop() || sec.offset().top > winOffset ) ) {
 			this.inView = false;
 
-			if(this.onExit) {
+			if(this.onceExit && typeof this.onceExit === "function") {
+				this.onceExit.call(this, sec);
+				this.onceExit = null;
+			}
+
+			if(this.onExit && typeof this.onExit === "function") {
 				this.onExit.call(this, sec);
 			}
 
@@ -57,6 +69,12 @@
 
 		// this.inView = false;
 		return false;
+	};
+
+	//destroy
+	ScrollManager.prototype.destroy = function() {
+		$(this.context).off('scroll');
+		delete this;
 	};
 
 	$.fn.scrollmanager = function(options) {

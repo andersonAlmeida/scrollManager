@@ -35,7 +35,8 @@
 	<script src="build/scrollManager.min.js"></script>	
 
 	<script>
-		$('.sec').scrollmanager({
+		var objs = [];
+		objs = $('.sec').scrollmanager({
 			offset: .3,
 			onEnter: function(elm) {
 				console.log("entrou: ", elm, " inview: ", this.inView);
@@ -43,6 +44,12 @@
 			},
 			onExit: function(elm) {
 				console.log("saiu: ", elm, " inview: ", this.inView);
+			},
+			onceEnter: function(elm) {
+				console.log("UMA VEZ QUANDO ENTRAR : ", elm, " inview: ", this.inView);
+			},
+			onceExit: function(elm) {
+				console.log("UMA VEZ QUANDO SAIR : ", elm, " inview: ", this.inView);
 			}
 		});
 	</script>
