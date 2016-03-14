@@ -18,7 +18,7 @@
 		
 		// bind events		
 		this.binds();
-		this.isInView();
+		this.isInView(1);
 	};
 
 	ScrollManager.prototype.binds = function() {
@@ -40,9 +40,10 @@
 			context = $(this.context),
 			elmHeight = this.elmHeight,
 			winOffset = context.scrollTop() + win.innerHeight,
-			offset = sec.height() * this.offset;	
-
-		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() && ( sec.offset().top + offset ) < winOffset ) || ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset ) ) ) {
+			offset = sec.height() * this.offset;
+		
+		// debugger;
+		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() && ( sec.offset().top + offset ) <= winOffset ) /*|| ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset )*/ ) ) {
 			this.inView = true;
 
 			if(this.onceEnter && typeof this.onceEnter === "function") {
@@ -55,9 +56,10 @@
 			}
 
 			return true;
-		}
+		}		
 
-		if( this.inView && ( sec.offset().top + sec.height() < context.scrollTop() || sec.offset().top > winOffset ) ) {
+		// verify if leaves the viewport
+		if( this.inView && ( sec.offset().top + sec.height() <= context.scrollTop() || sec.offset().top >= winOffset ) ) {
 			this.inView = false;
 
 			if(this.onceExit && typeof this.onceExit === "function") {

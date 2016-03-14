@@ -11,6 +11,9 @@
 			margin: 0;
 			padding: 0;
 		}
+		h1{
+			margin: 0;
+		}
 		.sec {
 			/*height: 400px;*/
 			height: 100%;
@@ -35,16 +38,15 @@
 	<script src="src/scrollManager.js"></script>	
 
 	<script>
-		var objs = [];
-		objs = $('.sec').scrollmanager({
+		$('.sec').scrollmanager({
 			offset: 1,
 			onEnter: function(elm) {
 				console.log("entrou: ", elm, " inview: ", this.inView);
 				location.hash = $(elm).data('hash');
 			},
-			// onExit: function(elm) {
-			// 	console.log("saiu: ", elm, " inview: ", this.inView);
-			// },
+			onExit: function(elm) {
+				console.log("saiu: ", elm, " inview: ", this.inView);
+			},
 			// onceEnter: function(elm) {
 			// 	console.log("UMA VEZ QUANDO ENTRAR : ", elm, " inview: ", this.inView);
 			// },
