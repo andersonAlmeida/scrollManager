@@ -43,7 +43,8 @@
 			offset = sec.height() * this.offset;
 		
 		// debugger;
-		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() && ( sec.offset().top + offset ) <= winOffset ) /*|| ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset )*/ ) ) {
+		
+		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() && ( sec.offset().top + offset ) < winOffset ) /*|| ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset )*/ ) ) {			
 			this.inView = true;
 
 			if(this.onceEnter && typeof this.onceEnter === "function") {
@@ -56,7 +57,8 @@
 			}
 
 			return true;
-		}		
+		}	
+			
 
 		// verify if leaves the viewport
 		if( this.inView && ( sec.offset().top + sec.height() <= context.scrollTop() || sec.offset().top >= winOffset ) ) {
