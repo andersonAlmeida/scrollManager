@@ -36,15 +36,33 @@
 	};
 
 	ScrollManager.prototype.isInView = function(direction) {
-		var sec = this.element,
+		var w = $(win),
+			sec = this.element,
 			context = $(this.context),
-			elmHeight = this.elmHeight,
-			winOffset = context.scrollTop() + win.innerHeight,
+			// secHeight = sec.height() * this.offset,
+			// secTop = sec.offset().top,
+			// secBottom = secTop + secHeight,
+			// scrollTop = context.scrollTop(), 
+			// winOffset = context.scrollTop() + w.innerHeight,
 			offset = sec.height() * this.offset;
+
+			var viewport = {
+		        top : context.scrollTop(),
+		        left : context.scrollLeft()
+		    };
+		    viewport.right = viewport.left + w.width();
+		    viewport.bottom = viewport.top + w.height();
+		    
+		    var bounds = this.element.offset();
+		    bounds.right = bounds.left + this.element.outerWidth();
+		    bounds.bottom = bounds.top + this.element.outerHeight();
+
+		    //(!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom))
 		
 		// debugger;
-		
-		if( !this.inView && ( ( ( sec.offset().top + offset ) >= context.scrollTop() && ( sec.offset().top + offset ) < winOffset ) /*|| ( sec.offset().top + sec.height() - offset > context.scrollTop() && sec.offset().top + sec.height() - offset < winOffset )*/ ) ) {			
+
+		if( !this.inView && ( (bounds.top < viewport.bottom && bounds.top >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom > viewport.top) ) ) {		
+		// if( !this.inView && ( ( secTop >= scrollTop && secTop < winOffset ) || ( secBottom < winOffset && secBottom > scrollTop ) )	) {
 			this.inView = true;
 
 			if(this.onceEnter && typeof this.onceEnter === "function") {
@@ -61,7 +79,8 @@
 			
 
 		// verify if leaves the viewport
-		if( this.inView && ( sec.offset().top + sec.height() <= context.scrollTop() || sec.offset().top >= winOffset ) ) {
+		if( this.inView && ( bounds.bottom <= viewport.top || bounds.top >= viewport.bottom ) ) {
+		// if( this.inView && ( secTop + secHeight <= scrollTop || secTop >= winOffset ) ) {
 			this.inView = false;
 
 			if(this.onceExit && typeof this.onceExit === "function") {
