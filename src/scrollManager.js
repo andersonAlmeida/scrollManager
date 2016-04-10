@@ -15,6 +15,8 @@
 		this.inView = false;
 		this.offset = options.offset;
 		this.scrollDirection = $(this.context).scrollTop();
+
+		element.data("scrollmanager", this);
 		
 		// bind events		
 		this.binds();
@@ -39,29 +41,18 @@
 		var w = $(win),
 			sec = this.element,
 			context = $(this.context),
-			// secHeight = sec.height() * this.offset,
-			// secTop = sec.offset().top,
-			// secBottom = secTop + secHeight,
-			// scrollTop = context.scrollTop(), 
-			// winOffset = context.scrollTop() + w.innerHeight,
 			offset = sec.height() * this.offset;
 
-			var viewport = {
-		        top : context.scrollTop(),
-		        left : context.scrollLeft()
-		    };
-		    viewport.right = viewport.left + w.width();
-		    viewport.bottom = viewport.top + w.height();
-		    
-		    var bounds = this.element.offset();
-		    bounds.right = bounds.left + this.element.outerWidth();
-		    bounds.bottom = bounds.top + this.element.outerHeight();
-
-		    //(!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom))
-		
-		// debugger;
-
-		// if( !this.inView && ( (bounds.top + offset < viewport.bottom && bounds.top - offset >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom - offset > viewport.top) ) ) {
+		var viewport = {
+	        top : context.scrollTop(),
+	        left : context.scrollLeft()
+	    };
+	    viewport.right = viewport.left + w.width();
+	    viewport.bottom = viewport.top + w.height();
+	    
+	    var bounds = this.element.offset();
+	    bounds.right = bounds.left + this.element.outerWidth();
+	    bounds.bottom = bounds.top + this.element.outerHeight();
 
 		if(direction > 0) {
 			if( !this.inView && ( (bounds.top + offset < viewport.bottom && bounds.top >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom - offset > viewport.top) ) ) {				
