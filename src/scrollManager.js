@@ -61,20 +61,38 @@
 		
 		// debugger;
 
-		if( !this.inView && ( (bounds.top < viewport.bottom && bounds.top >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom > viewport.top) ) ) {		
-		// if( !this.inView && ( ( secTop >= scrollTop && secTop < winOffset ) || ( secBottom < winOffset && secBottom > scrollTop ) )	) {
-			this.inView = true;
+		// if( !this.inView && ( (bounds.top + offset < viewport.bottom && bounds.top - offset >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom - offset > viewport.top) ) ) {
 
-			if(this.onceEnter && typeof this.onceEnter === "function") {
-				this.onceEnter.call(this, sec);
-				this.onceEnter = null;
+		if(direction > 0) {
+			if( !this.inView && ( (bounds.top + offset < viewport.bottom && bounds.top >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom - offset > viewport.top) ) ) {				
+				this.inView = true;
+
+				if(this.onceEnter && typeof this.onceEnter === "function") {
+					this.onceEnter.call(this, sec);
+					this.onceEnter = null;
+				}
+
+				if(this.onEnter && typeof this.onEnter === "function") {
+					this.onEnter.call(this, sec);
+				}
+
+				return true;
 			}
+		} else {
+			if( !this.inView && ( (bounds.top < viewport.bottom && bounds.top - offset >= viewport.top) || (bounds.bottom <= viewport.bottom && bounds.bottom - offset > viewport.top) ) ) {				
+				this.inView = true;
 
-			if(this.onEnter && typeof this.onEnter === "function") {
-				this.onEnter.call(this, sec);
+				if(this.onceEnter && typeof this.onceEnter === "function") {
+					this.onceEnter.call(this, sec);
+					this.onceEnter = null;
+				}
+
+				if(this.onEnter && typeof this.onEnter === "function") {
+					this.onEnter.call(this, sec);
+				}
+
+				return true;
 			}
-
-			return true;
 		}	
 			
 
